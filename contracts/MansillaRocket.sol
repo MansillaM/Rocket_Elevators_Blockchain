@@ -1233,17 +1233,18 @@ abstract contract Ownable is Context {
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract MansillaRocket is ERC721Enumerable, Ownable {
+contract MansillaRocket is ERC721Enumerable, Ownable{
   using Strings for uint256;
 
   string baseURI;
   string public baseExtension = ".json";
   uint256 public cost = 0.01 ether;
-  uint256 public maxSupply = 10000;
-  uint256 public maxMintAmount = 20;
-  bool public paused = false;
+  uint256 public maxSupply = 25;
+  uint256 public maxMintAmount = 2;
+  bool public paused = true;
   bool public revealed = false;
   string public notRevealedUri;
+  address[] addressList;
 
   constructor(
     string memory _name,
@@ -1260,6 +1261,9 @@ contract MansillaRocket is ERC721Enumerable, Ownable {
     return baseURI;
   }
 
+  function _burn(uint256 tokenId) internal override(ERC721) {
+    super._burn(tokenId);
+  }
   // public
   function mint(uint256 _mintAmount) public payable {
     uint256 supply = totalSupply();
@@ -1312,6 +1316,8 @@ contract MansillaRocket is ERC721Enumerable, Ownable {
         : "";
   }
 
+  
+
   //only owner
   function reveal() public onlyOwner {
       revealed = true;
@@ -1340,6 +1346,21 @@ contract MansillaRocket is ERC721Enumerable, Ownable {
   function pause(bool _state) public onlyOwner {
     paused = _state;
   }
+
+  function freeNft() public onlyOwner {
+        addressList =  [
+    0x92A22470b1eC3DE435Da89E9f0B7183cEB2f3714,
+    0x004660331dd96BfE95Ad4D32bf5EF7845a0Bc689,
+    0xe578a5896931207AEb909Ba12EFc92b88422950a,
+    0x4221ab4A5A1172FF48bB385d38fBa33453427957,
+    0x4eeA12a0B97af76FaBDC91b76B1960173DC15e89,
+    0x6c9e61363F48fEAc41f9a2469E54994Ce745E274,
+    0xDf6EfD03c762374c1a840558dD9d3554B4fa3658,
+    0x326a276b46BAaD8d1019fEd693B02ED0ad82FA01,
+    0x78aDae76DB2FcC462Fe4AD58Eb2ED87a1bF05F9f,
+    0x71c52f19d1cd0bC0a92663ab211E20a7a31Ad5BC
+     ];
+    }
  
   function withdraw() public payable onlyOwner {
     // This will pay HashLips 5% of the initial sale.
