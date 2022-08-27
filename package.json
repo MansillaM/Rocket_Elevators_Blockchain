@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MansillaM/Rocket_Elevators_Blockchain#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
     "@truffle/contract": "^4.5.23",
     "@truffle/hdwallet-provider": "^2.0.14",
     "dotenv": "^16.0.1",
@@ -30,6 +31,7 @@
     "shortid": "^2.2.16",
     "solc": "^0.8.16",
     "truffle-contract": "^4.0.31",
+    "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.7.5"
   },
   "keywords": [],
