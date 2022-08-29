@@ -18,11 +18,11 @@ const provider = new Web3(new HDWalletProvider({
 //Important Data
 const contractNFT = "./build/contracts/MansillaRocket.json";
 const abi = JSON.parse(fs.readFileSync(contractNFT));
-const contractAddress = "0x9ffd408e1a5b4f0fd26c553b03e40330d7d129f8";
+const contractAddress = "0x7d9FF1C6672F6Ce7468e5A3c699A2eFF9eDA76A8";
 const MansillaRock = contract(abi, contractAddress);
 
 //Web3 Provider
-MansillaRock.setProvider(provider);
+MansillaRock.setProvider(provider.currentProvider);
 
 
 app.get('/getWalletToken/:_owner' , async (req, res) => {
@@ -34,12 +34,26 @@ app.get('/getWalletToken/:_owner' , async (req, res) => {
 app.get('/metaData/:tokenId' , async (req, res) => {
   const instance = await MansillaRock.at(contractAddress);
   let result = await instance.tokenURI(req.params.tokenId);
-  res.send(result);
+  res.json(result);
 })
 
 app.post('/gift/:address' , async (req, res) => {
+  let accounts = await provider.eth.getAccounts();
+  let mainAccount = accounts[0];
   const instance = await MansillaRock.at(contractAddress);
-  let result = await instance.giveFreeNFT(req.params.address)
+  let result = await instance.giveFreeNFT(req.params.address, {
+    from: mainAccount
+  })
+  res.send(result);
+})
+
+app.post('/mint/:address' , async (req, res) => {
+  let accounts = await provider.eth.getAccounts();
+  let mainAccount = accounts[0];
+  const instance = await MansillaRock.at(contractAddress);
+  let result = await instance.safeMint(req.params.address, {
+    from: mainAccount
+  })
   res.send(result);
 })
 
