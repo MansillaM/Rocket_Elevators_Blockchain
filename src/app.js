@@ -18,7 +18,7 @@ const provider = new Web3(new HDWalletProvider({
 //Important Data
 const contractNFT = "./build/contracts/MansillaRocket.json";
 const abi = JSON.parse(fs.readFileSync(contractNFT));
-const contractAddress = "0x7d9FF1C6672F6Ce7468e5A3c699A2eFF9eDA76A8";
+const contractAddress = "0xC7Ad9975D429055C7E03Ef9e329af2EB86058215";
 const MansillaRock = contract(abi, contractAddress);
 
 //Web3 Provider

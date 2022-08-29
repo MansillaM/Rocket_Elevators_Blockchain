@@ -1246,7 +1246,7 @@ contract MansillaRocket is ERC721Enumerable, Ownable{
   uint256 public maxSupply = 25;
   uint256 public maxMintAmount = 2;
   bool public paused = false;
-  bool public revealed = false;
+  bool public revealed = true;
   string public notRevealedUri;
 
   constructor(
